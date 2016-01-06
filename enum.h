@@ -264,7 +264,7 @@ namespace better_enums {
 template <typename T>
 BETTER_ENUMS__CONSTEXPR inline T _default()
 {
-    return (typename T::_enumerated)0;
+    return static_cast<typename T::_enumerated>(0);
 }
 
 template <>
@@ -302,7 +302,7 @@ template <typename CastTo, typename Element>
 BETTER_ENUMS__CONSTEXPR static optional<CastTo>
 _map_index(const Element *array, optional<std::size_t> index)
 {
-    return index ? (CastTo)array[*index] : optional<CastTo>();
+    return index ? static_cast<CastTo>(array[*index]) : optional<CastTo>();
 }
 
 #ifdef BETTER_ENUMS__VC2008_WORKAROUNDS
@@ -425,7 +425,7 @@ _select(const char *from, std::size_t from_length, std::size_t index)
 
 BETTER_ENUMS__CONSTEXPR inline char _to_lower_ascii(char c)
 {
-    return c >= 0x41 && c <= 0x5A ? (char)(c + 0x20) : c;
+    return c >= 0x41 && c <= 0x5A ? static_cast<char>(c + 0x20) : c;
 }
 
 BETTER_ENUMS__CONSTEXPR inline bool _names_match(const char *stringizedName,
@@ -681,7 +681,7 @@ BETTER_ENUMS__ID(GenerateStrings(Enum, __VA_ARGS__))                           \
 BETTER_ENUMS__CONSTEXPR inline const Enum                                      \
 operator +(Enum::_enumerated enumerated)                                       \
 {                                                                              \
-    return (Enum)enumerated;                                                   \
+    return static_cast<Enum>(enumerated);                                      \
 }                                                                              \
                                                                                \
 BETTER_ENUMS__CONSTEXPR inline Enum::_optional_index                           \
@@ -725,7 +725,7 @@ BETTER_ENUMS__CONSTEXPR inline Enum::_integral Enum::_to_integral() const      \
 BETTER_ENUMS__CONSTEXPR inline Enum                                            \
 Enum::_from_integral_unchecked(_integral value)                                \
 {                                                                              \
-    return (_enumerated)value;                                                 \
+    return static_cast<_enumerated>(value);                                    \
 }                                                                              \
                                                                                \
 BETTER_ENUMS__CONSTEXPR inline Enum::_optional                                 \
