@@ -81,7 +81,7 @@
 #ifdef __GNUC__
 #   define BETTER_ENUMS__UNUSED(x) x __attribute__((__unused__))
 #else
-#   define BETTER_ENUMS__UNUSED(x) x
+#   define BETTER_ENUMS__UNUSED(x)
 #endif
 
 
